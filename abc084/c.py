@@ -11,7 +11,10 @@ def main():
             S = x[a][1]
             F = x[a][2]
             time = max(time, S)
-            time += time % F
+            if time % F == 0:
+                pass
+            else:
+                time = time + F - time % F
             time += C
         print(time)
 
