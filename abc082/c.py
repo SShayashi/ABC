@@ -13,6 +13,11 @@ def main():
     for i in B:
         if B[i] == 0:
             continue
-        total += min(abs(B[i]-i), B[i])
+        if B[i] == i:
+            continue
+        elif B[i] > i:
+            total += B[i] - i
+        else:
+            total += B[i]
     print(total)
 main()
