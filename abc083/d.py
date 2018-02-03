@@ -11,4 +11,19 @@ def main():
             return print(k)
 
 
-main()
+def ans():
+    S = input()
+    N = len(S)
+    if not ('1' in S and '0' in S):
+        return print(N)
+
+    tmp = 1000000
+    for i, v in enumerate(S):
+        if i == 0:
+            continue
+        if S[i-1] != v:
+            tmp = min(max(i, N-i), tmp)
+    return print(tmp)
+
+# main()
+ans()
