@@ -11,7 +11,7 @@ def main():
     if a == b:
         return print('Yes')
 
-    d = [b[i]-a[i] for i in range(N)]
+    d = [b[i] - a[i] for i in range(N)]
     dif_cnt = 0
     for i in range(N):
         if is_even(a[i]) and is_even(b[i]):
@@ -31,4 +31,28 @@ def main():
     return print('No')
 
 
-main()
+def after_exp():
+    N = int(input())
+    a = list(map(int, input().split()))
+    b = list(map(int, input().split()))
+
+    count = sum(b) - sum(a)
+    if count < 0: return print('No')
+    if a == b: return print('Yes')
+
+    Amove = 0
+    Bmove = 0
+    for i in range(N):
+        if a[i] > b[i]:
+            Amove += a[i] - b[i]
+        else:
+            Bmove += (b[i] - a[i]) //2
+
+    if Amove > Bmove:
+        return print('No')
+    else:
+        return print('Yes')
+
+
+# main()
+after_exp()
