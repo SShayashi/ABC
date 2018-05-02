@@ -13,15 +13,15 @@ def m():
     endpoint = 0
     for n in range(N):
         for k in range(endpoint, endpoint + t[n]*2):
-            max_v[k] = v[n]
+            max_v[k+1] = v[n]
         endpoint = k +1
 
     max_v[0] = 0
+    max_v[maxtime*2] = 0
     for m in range(1, maxtime*2+1):
         max_v[m] = min(max_v[m-1]+0.5, max_v[m])
 
-    max_v[maxtime*2] = 0
-    for p in range(maxtime*2 - 1, 0, -1):
+    for p in range(maxtime*2 - 1, -1, -1):
         max_v[p] = min(max_v[p+1]+0.5, max_v[p])
 
     ans = solve_area(max_v)
