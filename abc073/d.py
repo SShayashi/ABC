@@ -26,4 +26,8 @@ def m():
             cost += e[l[i-1]][l[i]]
         ans = min(cost, ans)
     return ans
+
+def someone_ans():
+
+    pass
 print(m())
