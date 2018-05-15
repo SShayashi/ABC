@@ -20,9 +20,6 @@ def m():
         if point == len(s) -1:
             a.append('x')
             break
-        if point >= len(s):
-            a.append('y')
-            break
 
     ans = 0
     if a[0] == 'x':
@@ -41,7 +38,7 @@ def m():
             ans *=3 % MOD
 
     return ans % MOD
-
+print(m())
 # def someone_ans():
 #     n=int(input())
 #     a=input()
@@ -66,5 +63,5 @@ def m():
 #         elif c[i]==0 and c[i+1]==0: count*=3
 #     return count % 1000000007
 
-# print(m())
+
 # print(someone_ans())
