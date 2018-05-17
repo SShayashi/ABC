@@ -1,4 +1,5 @@
-import queue
+import sys
+sys.setrecursionlimit(100000)
 MAX = 10 ** 10
 def m():
     def dijkstra(ds, start):
@@ -36,34 +37,26 @@ def m():
 
 def ans():
     def dfs(v, p, d):
-        visited = []
-        q = queue.Queue()
-        for i in tree[v]:
-            q.put((i[0], i[1], p))
-        visited.append(v)
-        while not q.empty():
-            e, cost, parent = q.get()
-            if (e in visited): continue
-            if e == parent : continue
-            visited.append(e)
-            depth[e] = cost
-            for i in tree[e]:
-                if (i[0] in visited): continue
-                q.put((i[0], i[1] + cost, e))
+        depth[v] = d
+        for e, cost in tree[v]:
+            if e == p:
+                continue
+            dfs(e, v, d + cost)
 
     n = int(input())
-    tree = [[] for _ in range(n+1)]
+    tree = [[] for _ in range(n + 1)]
     depth = [0] * (n * 2)
-    for _ in range(1,n):
+    for _ in range(1, n):
         a, b, c = map(int, input().split())
-        tree[a].append((b,c))
-        tree[b].append((a,c))
+        tree[a].append((b, c))
+        tree[b].append((a, c))
 
     q, k = map(int, input().split())
     dfs(k, -1, 0)
     for _ in range(q):
         x, y = map(int, input().split())
         print(depth[x] + depth[y])
+
 
 ans()
 # m()
