@@ -36,14 +36,24 @@ def m():
 
 def ans():
     def dfs(v, p, d):
-        depth[v] = d
-        for e, cost in tree[v]:
-            if e == p:
-                continue
-            dfs(e, v, d + cost)
+        visited = []
+        q = queue.Queue()
+        for i in tree[v]:
+            q.put((i[0], i[1], p))
+        visited.append(v)
+        while not q.empty():
+            e, cost, parent = q.get()
+            if (e in visited): continue
+            if e == parent : continue
+            visited.append(e)
+            depth[e] = cost
+            for i in tree[e]:
+                if (i[0] in visited): continue
+                q.put((i[0], i[1] + cost, e))
+
     n = int(input())
     tree = [[] for _ in range(n+1)]
-    depth = [0] * 100001
+    depth = [0] * (n * 2)
     for _ in range(1,n):
         a, b, c = map(int, input().split())
         tree[a].append((b,c))
