@@ -17,14 +17,10 @@ def m():
     len4s = len(fours)
     len2s = len(twes)
     others = len(others)
-    if (others + len2s) <= len4s + 1:
-        return 'Yes'
+    if len2s:
+        others += 1
     if others <= len4s + 1:
-        if len2s % 2 == 0:
-            return 'Yes'
-    if len4s == 0 and others ==0:
-        if len2s % 2 == 0:
-            return 'Yes'
+        return 'Yes'
     return 'No'
 
 
