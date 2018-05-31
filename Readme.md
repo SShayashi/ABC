@@ -1,5 +1,8 @@
 # Atcoder practice
 
+## Answer status
+https://kenkoooo.com/atcoder/?user=sshayashi&rivals=&kind=category
+
 ## Rule
 
 | 回答 | コミットメッセージ|
