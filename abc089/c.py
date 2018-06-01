@@ -1,34 +1,28 @@
 def m():
     n = int(input())
     S = [str(input()) for _ in range(n)]
-    march = [[] for _ in range(5)]
+    m = 0
+    a = 0
+    r = 0
+    c = 0
+    h = 0
+    x = [0, 0, 0, 0, 0, 0, 1, 1, 1, 2]
+    y = [1, 1, 1, 2, 2, 3, 2, 2, 3, 3]
+    z = [2, 3, 4, 3, 4, 4, 3, 4, 4, 4]
     for i in range(n):
         if S[i][0] == "M":
-            march[0].append(S[i])
+            m += 1
         elif S[i][0] == "A":
-            march[1].append(S[i])
+            a += 1
         elif S[i][0] == "R":
-            march[2].append(S[i])
+            r += 1
         elif S[i][0] == "C":
-            march[3].append(S[i])
+            c += 1
         elif S[i][0] == "H":
-            march[4].append(S[i])
-
-    cnt = 0
-    for j in range(n):
-        if len(march[j]) == 0:
-            cnt +=1
-    if cnt < 3:
-
-        return 1
-
-    if cnt == 3:
-        pass
-
-    if cnt == 4:
-        pass
-
-    if cnt == 5:
-        pass
-
+            h += 1
+    ans = 0
+    d = [m, a, r, c, h]
+    for j in range(10):
+        ans += d[x[j]] * d[y[j]] * d[z[j]]
+    return ans
 print(m())
