@@ -2,7 +2,8 @@ def m():
     n = int(input())
     s = [str(input()) for _ in range(n)]
     mins = ""
-    ans = ""
+
+    # 一番小さい文字列取得
     tmp = 9999999
     for i in range(n):
         if len(s[i]) <= tmp:
@@ -10,10 +11,10 @@ def m():
             mins = s[i]
 
     d = dict()
-    for k in range(97, 97+26):
-        d[chr(k)] = 0
+    for k in mins:
+        d[k] = 0
 
-    flag = 0
+    #
     for c in mins:
         flag = 0
         for i in range(n):
@@ -24,9 +25,32 @@ def m():
             continue
         d[c] += 1
 
-    for k in range(97, 97 + 26):
-        for p in range(d[chr(k)]):
-            ans += chr(k)
+    ans = ""
+    for k in sorted(d.keys()):
+        ans += k * d[k]
     return ans
 
-print(m())
+
+import copy
+
+n = int(input())
+s = []
+
+for i in range(n):
+    s.append(list(input()))
+
+shared = copy.deepcopy(s[0])
+for si in s:
+    tmp = copy.deepcopy(shared)
+    tmp2 = []
+    for c in si:
+        if c in tmp:
+            tmp2.append(c)
+            tmp.remove(c)
+    shared = copy.deepcopy(tmp2)
+
+for c in sorted(shared):
+    print(c, end='')
+
+print()
+
