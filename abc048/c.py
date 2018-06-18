@@ -1,25 +1,19 @@
 def m():
     n, x = map(int, input().split())
     a = list(map(int, input().split()))
+    b = a.copy()
     ans = 0
-    for i in range(1, n-1, 2):
-        if a[i+1] > a[i-1]:
-            if a[i+1] + a[i] < x:
-                continue
-            ans += (a[i+1] + a[i]) -x
-            if a[i+1] > x:
-                a[i+1] = x
+    for i in range(n):
+        if b[i] > x:
+            b[i] = x
 
+    for j in range(1, n):
+        if b[j-1] + b[j] > x:
+            b[j] -= (b[j-1] + b[j]) - x
         else:
-            if a[i-1] + a[i] < x:
-                continue
-            ans += (a[i-1] + a[i]) -x
-    if len(a) % 2 == 0:
-        if a[-1] + a[-2] < x:
-            return ans
-        ans += (a[-1] + a[-2]) -x
-        return ans
-    else:
-        return ans
+            pass
+    for k in range(n):
+        ans += a[k] - b[k]
+    return ans
 
 print(m())
