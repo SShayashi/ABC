@@ -2,44 +2,24 @@ def m():
     n, x = map(int, input().split())
     a = list(map(int, input().split()))
     ans = 0
-    for i in range(1,n):
-        d = a[i]+a[i-1] - x
-        if d <= 0:
-            ad = abs(a[i] - a[i-1])
-            if abs(d) < abs(ad):
-                if a[i] > a[i-1]:
-                    a[i] -= d
-                    ans += d
-                else:
-                    a[i-1] -=d
-                    ans += d
-            else:
-                if a[i] > a[i-1]:
-                    a[i] -=ad
-                    ans += ad
-                    z = abs(d) - ad
-                    if z % 2 == 0:
-                        a[i] -= z//2
-                        a[i-1] -= z//2
-                        ans += z
-                        continue
+    for i in range(1, n-1, 2):
+        if a[i+1] > a[i-1]:
+            if a[i+1] + a[i] < x:
+                continue
+            ans += (a[i+1] + a[i]) -x
+            if a[i+1] > x:
+                a[i+1] = x
 
-                    a[i] -= z//2
-                    a[i-1] -= (z//2 + 1)
-                    ans +=z
-                else:
-                    a[i-1] -=ad
-                    ans += ad
-                    z = abs(d) - ad
-                    if z % 2 == 0:
-                        a[i] -= z//2
-                        a[i-1] -= z//2
-                        ans += z
-                        continue
-                    a[i] -= z//2
-                    a[i-1] -= (z//2+1)
-                    ans +=z
-    return ans
-
+        else:
+            if a[i-1] + a[i] < x:
+                continue
+            ans += (a[i-1] + a[i]) -x
+    if len(a) % 2 == 0:
+        if a[-1] + a[-2] < x:
+            return ans
+        ans += (a[-1] + a[-2]) -x
+        return ans
+    else:
+        return ans
 
 print(m())
