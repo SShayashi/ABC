@@ -47,4 +47,16 @@ def m():
             nowa = int(nowt * (a / t))
     return nowa + nowt
 
-print(m())
+
+def ans():
+    n = int(input())
+    nowt, nowa = 1,1
+    for _ in range(n):
+        t, a = map(int, input().split())
+        c = max(nowt//t,nowa//a)
+        if nowt > c * t or nowa > c * a:
+            c += 1
+        nowt, nowa = max(c*t,t), max(c*a,a)
+    return int(nowa+nowt)
+
+print(ans())
