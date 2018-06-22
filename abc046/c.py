@@ -38,6 +38,7 @@ def m():
                     nowt = int(nowa * (t / a))
                     continue
                 nowt = int((t / a) * nowa)
+
                 continue
 
             for j in range(nowt):
