@@ -1,10 +1,8 @@
 def m():
     n, a = map(int, input().split())
     x = list(map(int, input().split()))
-    same = x.count(a)
-    under = [k for k in x if k > a]
-    over = [k for k in x if k < a]
-
+    mm = max(x)
+    dp = [[[0 for _ in range(n)] for _ in range(n)] for _ in range(n*mm)]
     for i in range(n):
         for j in range(n):
             pass
