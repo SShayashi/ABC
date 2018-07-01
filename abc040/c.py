@@ -22,4 +22,16 @@ def m():
             cost += abs(a[i] - a[i+1])
             break
     return cost
-print(m())
+
+def ans():
+    n = int(input())
+    a = list(map(int, input().split()))
+    dp = [0] * (n+1)
+    dp[0] = 0
+    dp[1] = abs(a[0]-a[1])
+    for i in range(2, n):
+        x = dp[i-2] + abs(a[i-2]-a[i])
+        y = dp[i-1] + abs(a[i-1]-a[i])
+        dp[i] = min(x,y)
+    return dp[n-1]
+print(ans())
