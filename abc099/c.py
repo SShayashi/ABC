@@ -12,17 +12,16 @@ def m():
             break
         a.add(tmp)
     l = list(a)
-    l.sort(reverse=True)
+    l.sort()
     dp = [0] * (n+1)
-    dp[1] = 1
-    for i in range(2,n+1):
-        cnt = 999999999
-        p = dp[i-1]
-        for k in l:
-            if (i % k) == 0:
-                cnt = i // k
+    dp[0] = 0
+    for i in range(1,n+1):
+        b = []
+        for j in l:
+            if j > i:
                 break
-        dp[i] = min(cnt, dp[i-1]+1)
+            b.append(1 + dp[i-j])
+        dp[i] = min(b)
     return dp[n]
 
 print(m())
