@@ -1,16 +1,24 @@
 def m():
     n, m = map(int, input().split())
+    bridge = [1 for _ in range(n)]
     g = []
     for _ in range(m):
         a, b = map(int, input().split())
-        flag = 0
-        for p in g:
-            if a >= p[0] and b <= p[1]:
-                flag = 1
+        g.append((a, b))
+    g.sort(key=lambda x: x[1])
+    cnt = 0
+    for e in g:
+        f = 0
+        for j in range(e[1]-1, e[0]-1, -1):
+            if bridge[j] == 0:
+                f = 1
                 break
-        if flag:
+        if f:
             continue
-        g.append((a,b))
-    return len(g)
+        # if bridge[e[0]:e[1]].count(0):
+        #     continue
+        bridge[e[1]-1] = 0
+        cnt += 1
+    return cnt
 
 print(m())
