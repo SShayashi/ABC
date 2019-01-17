@@ -23,36 +23,40 @@ def m():
     flist.sort(reverse=True, key=lambda x:x[1])
     slist.sort(reverse=True, key=lambda x:x[1])
 
-    if flist[0][0] != slist[0][0] and len(flist) == 1 and len(slist) == 1:
+    if len(flist) == 1 and len(slist) == 1:
+        if flist[0][0] == slist[0][0]:
+            return N//2
         return 0
-
+    if len(flist) == 1:
+        return N//2 - slist[0][1]
+    if len(slist) == 1:
+        return N//2 - flist[0][1]
 
     if flist[0][0] != slist[0][0]:
         ans = 0
-        for k, v in flist[1:]:
-            ans += v
-        for k, v in slist[1:]:
-            ans += v
+        for k, v in flist:
+            if k != flist[0][0]:
+                ans += v
+        for k, v in slist:
+            if k != slist[0][0]:
+                ans += v
         return ans
 
-    if flist[0][1] == slist[0][1]:
-        return N//2
+    fans = 0
+    sans = 0
+    for k, v in flist:
+        if k != flist[0][0]:
+            fans += v
+    for k, v in slist:
+        if k != slist[1][0]:
+            fans += v
 
-    if flist[0][1] > slist[0][1]:
-        ans = 0
-        for k, v in flist[1:]:
-            ans += v
-        for k, v in slist[2:]:
-            ans += v
-        ans += slist[0][0]
-        return ans
-    else:
-        ans = 0
-        for k, v in slist[1:]:
-            ans += v
-        for k, v in flist[2:]:
-            ans += v
-        ans += flist[0][0]
-        return ans
+    for k, v in flist:
+        if k != flist[1][0]:
+            sans += v
+    for k, v in slist:
+        if k != slist[0][0]:
+            sans += v
+    return min(fans,sans)
 
 print(m())
