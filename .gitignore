@@ -1,1 +1,3 @@
-/not_public_contest
+not_public_contest/
+.python-version
+.idea/
