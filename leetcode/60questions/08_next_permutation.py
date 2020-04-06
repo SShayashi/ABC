@@ -3,27 +3,35 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
+
+        def rev(nums, left, right):
+            while left < right:
+                nums[left], nums[right] = nums[right], nums[left]
+                left += 1
+                right -= 1
+
         length = len(nums)
-        pair = [0, 0]
-        for i in range(1, length):
-            if nums[i-1] <= nums[i]:
-                pair[0] = i-1
-                pair[1] = i
-        if pair == [0, 0]:
-            nums.sort()
+        p = 0
+        for i in range(length - 2, 0, -1):
+            if nums[i+1] > nums[i]:
+                p = i
+                break
+        if p == 0:
+            rev(nums, 0, length - 1)
             return
-        tmp = nums[pair[0]]
-        first_min_i = nums.index(min(nums[pair[0]+1:]))
-        nums[pair[0]] = nums[first_min_i]
-        nums[first_min_i] = tmp
-        subnums = nums[pair[0] + 1:]
-        subnums.sort()
-        sublen = len(subnums)
-        for i in range(sublen):
-            nums[i+pair[0]+1] = subnums[i]
+
+        j = 0
+        # 右に行くほど小さいはず，そのなかで右から数えて一，num[p]より番大きいものを探したい
+        for i in range(length - 1, -1, -1):
+            if nums[i] > nums[p]:
+                j = i
+                break
+        nums[p], nums[j] = nums[j], nums[p]
+        rev(nums, p+1, length-1)
         return
 
 
-x = [2, 3, 1]
+# x = [1,2,3]
+x = [2,3,1,3,3]
 Solution().nextPermutation(x)
 print(x)
