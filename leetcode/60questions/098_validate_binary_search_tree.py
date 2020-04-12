@@ -13,23 +13,16 @@ class Solution:
     ans = True
 
     def isValidBST(self, root: TreeNode) -> bool:
-        def dfs(parent: TreeNode = None, current: TreeNode = None, is_l=None, is_r=None):
+        def dfs(current, upper, lower):
             if current is None:
                 return
-            # root node のとき
-            if parent is None:
-                dfs(parent=current, current=current.left, is_l=True)
-                dfs(parent=current, current=current.right, is_r=True)
-            if is_r:
-                if parent.val >= current.val:
-                    self.ans = False
-            if is_l:
-                if parent.val <= current.val:
-                    self.ans = False
-            dfs(parent=current, current=current.left, is_l=True)
-            dfs(parent=current, current=current.right, is_r=True)
-
-        dfs(current=root)
+            if not(lower < current.val < upper):
+                self.ans = False
+                return
+            dfs(current.left, min(upper, current.val), lower)
+            dfs(current.right, upper, max(lower, current.val))
+            return
+        dfs(current=root, upper=2**32, lower=-(2**32))
         return self.ans
 
 
