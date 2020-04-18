@@ -8,6 +8,14 @@
 
 最大値と最小値をもたせながら深さ優先を行うことで処理できた．
 
+### 121 Best Time to Buy and Sell Stock
+- 初見で解けた: false
+
+初見では愚直な方法しか思いつかず Time exceeded
+o(n)の解法はmin valueを更新しつつ，最大利益を更新し続ける
+自分は `i-1 > i < i+1` のときminを更新， `i-1 < i > i+1` のときmaxを更新して
+最終利益を `max -min` で計算したが，これでは [2,1,2,0,1] みたいなときに，minは0，maxが2になって
+エラーになる．
 
 ### 560 subarray sum equals k
 - 初見で解けた: false
