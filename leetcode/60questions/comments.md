@@ -17,6 +17,13 @@ o(n)の解法はmin valueを更新しつつ，最大利益を更新し続ける
 最終利益を `max -min` で計算したが，これでは [2,1,2,0,1] みたいな後半に再度minが更新される場合，minは0，maxが2になって
 エラーになる．
 
+### 387 First Unique Character in a String
+- 初見で解けた: True
+
+愚直にHashを使った．
+解法を見ると，pythonのcollectionsのcountを使うとよりコードが短くなることがわかった．
+
+
 ### 392 Is Subsequence
 - 初見で解けた: true
 
@@ -31,7 +38,7 @@ keyの要素は，その文字が現れたindexを表す．
   "c": [3],
   "d": [4],
   "e": [5],
-  "f": [6],
+  "f": [6]
 }
 ```
 
