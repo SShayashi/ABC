@@ -1,6 +1,6 @@
+import queue
 import sys
-sys.setrecursionlimit(10**5)
-input = sys.stdin.readline
+def input(): return sys.stdin.readline().rstrip()
 
 def m():
     n, q = map(int, input().split())
@@ -14,23 +14,31 @@ def m():
         p, x = map(int, input().split())
         counter[p] += x
 
-    ans = [0] * (n + 1)
-    visited = []
-    add_visited = visited.append
-    def dfs(root, point):
-        point += counter[root]
-        ans[root] = point
-        add_visited(root)
-        for j in tree[root]:
-            if j in visited:
-                continue
-            dfs(j, point)
-        return
+    que = queue.Queue()
+    visited = [False] * (n+1)
 
-    dfs(1, 0)
-    for i in range(1, n + 1):
-        print(ans[i], '', end='')
-    return ans
+    def bfs(root, base):
+        base += counter[root]
+        visited[root] = True
+        for e in tree[root]:
+            if visited[e]:
+                continue
+            que.put(e)
+            counter[e] += base
+
+        while not que.empty():
+            x = que.get()
+            point = counter[x]
+            visited[x] = True
+            for e in tree[x]:
+                if visited[e]:
+                    continue
+                que.put(e)
+                counter[e] += point
+
+    bfs(1, 0)
+    print(*counter[1:])
+    return
 
 
 m()
