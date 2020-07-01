@@ -5,25 +5,26 @@ def m():
     if SUM % N != 0:
         return -1
     B = SUM // N
-    X = [True] * N
+    if B == 0:
+        if sum(A) == 0:
+            return 0
+        else:
+            return -1
+
+    X = []
     for i in range(1, N):
-        tmp = [0,0]
+        X.append(i)
+        prev = 0
         f = True
-        for j in range(N):
-            if j == i or not X[j]:
-                avr = tmp[0] // tmp[1]
-                if avr != B:
-                    f = False
-                tmp = [0, 0]
-                continue
-
-            tmp[0] += A[j]
-            tmp[1] +=1
-        avr = tmp[0] // tmp[1]
-        if avr != B: f = False
-        if f: X[i] = False
-
-    return N - 1 - X.count(False)
-
+        for x in X:
+            if sum(A[prev:x]) % B != 0:
+                f = False
+                break
+            if (sum(A[prev:x]) // len(A[prev:x])) != B:
+                f = False
+                break
+            prev = x
+        if not f: X.pop()
+    return N-1 - len(X)
 
 print(m())
