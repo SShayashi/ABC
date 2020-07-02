@@ -13,18 +13,12 @@ def m():
 
     X = []
     for i in range(1, N):
-        X.append(i)
-        prev = 0
-        f = True
-        for x in X:
-            if sum(A[prev:x]) % B != 0:
-                f = False
-                break
-            if (sum(A[prev:x]) // len(A[prev:x])) != B:
-                f = False
-                break
-            prev = x
-        if not f: X.pop()
-    return N-1 - len(X)
+        if sum(A[:i]) // len(A[:i]) != B:
+            X.append(i)
+            continue
+        if sum(A[i:]) // len(A[i:]) != B:
+            X.append(i)
+            continue
+    return len(X)
 
 print(m())
